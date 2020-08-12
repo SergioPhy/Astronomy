@@ -1,6 +1,6 @@
-Write a function called angular_dist that calculates the angular distance between any two points on the celestial sphere given their right ascension and declination.
+#Write a function called angular_dist that calculates the angular distance between any two points on the celestial sphere given their right ascension and declination.
 
-Your function should take arguments in decimal degrees and return the distance in decimal degrees too.
+#Your function should take arguments in decimal degrees and return the distance in decimal degrees too.
 
 import numpy as np
 
