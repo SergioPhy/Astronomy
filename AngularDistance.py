@@ -6,7 +6,7 @@ import numpy as np
 
 # Write your angular_dist function here.
 
-def angular_dist(ra1,dec1,ra2,dec2):
+def angular_dist(ra1,dec1,ra2,dec2): #in degrees
   r1 = np.radians(ra1)
   d1 = np.radians(dec1)
   r2 = np.radians(ra2)
