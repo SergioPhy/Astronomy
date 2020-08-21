@@ -55,20 +55,3 @@ def crossmatch(cat1, cat2, max_radius):
   time_taken = time.perf_counter() - start
   
   return match, no_match, time_taken
-    closest_id = None
-    
-    for id2, ra2, dec2 in cat2_rad:
-      dist = angular_dist(ra1, dec1, ra2, dec2)
-      
-      if dist < closest_dist:
-        closest_dist = dist
-        closest_id = id2
-    
-    if closest_dist <= max_radius:
-      match.append((id1, closest_id, closest_dist))
-    else:
-      no_match.append(id1)
-      
-  time_taken = time.perf_counter() - start
-  
-  return match, no_match, time_taken
