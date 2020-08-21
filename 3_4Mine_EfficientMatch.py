@@ -1,3 +1,15 @@
+#Copy crossmatch from Break out and modify it to only loop through objects in the second catalogue with declinations between dec1 - max_radius and 
+#dec1 + max_radius using binary search.
+
+#Your crossmatch should use np.searchsorted to find the starting point (just before dec1 - max_radius) and then break out of the loop when the 
+#declination reaches dec1 + max_radius.
+
+#The return values should behave the same way as the original function, given the same arguments, except time_taken should be noticeably smaller for 
+#large catalogues.
+
+#Hint
+#Don't forget to use np.searchsorted to find the start and end indices of the loop through the declination-sorted second catalogue after you've sorted it.
+
 # Write your crossmatch function here.
 import numpy as np
 import time
