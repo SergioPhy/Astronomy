@@ -15,26 +15,46 @@ def angular_dist(ra1,dec1,ra2,dec2): #radians
   b = np.cos(dec1)*np.cos(dec2)*np.sin( np.abs(ra1-ra2)/2 )**2
   dist = 2*np.arcsin(np.sqrt(a + b))
   
-  return np.degrees(dist)
+  return dist
 
 def crossmatch(cat1, cat2, max_radius):
   start = time.perf_counter()
   
-  cat1_rad = []
-  cat2_rad = []
+  cat1 = np.radians(cat1)
+  cat2 = np.radians(cat2)
+  max_radius = np.radians(max_radius)
   
-  for i, row in enumerate(cat1, 0):
-    cat1_rad.append((i, np.radians(row[0]), np.radians(row[1])))
-  
-  for i, row in enumerate(cat2, 0):
-    cat2_rad.append((i, np.radians(row[0]), np.radians(row[1])))
+  #Ordering the cat2 by its declination
+  order = np.argsort(cat2[:,1]) #these steps are very interesting
+  cat2_ordered = cat2[order]
+  #print(cat2_ordered)
   
   match = []
   no_match = []
-  max_radius = max_radius
   
-  for id1, ra1, dec1 in cat1_rad:
-    closest_dist = np.inf
+  for id1, (ra1, dec1) in enumerate(cat1):
+    min_dist = np.inf
+    min_id = None
+    max_dec = dec1 + max_radius
+    
+    for id2, (ra2, dec2) in enumerate(cat2_ordered):
+      if dec2 > max_dec:
+        break
+      
+      dist = angular_dist(ra1, dec1, ra2, dec2)
+      
+      if dist<min_dist:
+        min_dist = dist      #these two steps are very interesting
+        min_id = order[id2]
+        
+    if min_dist <= max_radius:
+      match.append((id1, min_id, min_dist))
+    else:
+      no_match.append(id1)
+      
+  time_taken = time.perf_counter() - start
+  
+  return match, no_match, time_taken
     closest_id = None
     
     for id2, ra2, dec2 in cat2_rad:
