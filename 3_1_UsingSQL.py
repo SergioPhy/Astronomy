@@ -8,3 +8,17 @@ WHERE radius > 1;
 
 SELECT kepler_id, t_eff FROM Star
 WHERE t_eff BETWEEN 5000 AND 6000
+
+#In this question you should write a query to find the kepler_name and radius of each planet in the Planet table which 
+#is a confirmed exoplanet, meaning that their kepler_name is not NULL, or, equivalently, whose status is 'CONFIRMED'.
+
+SELECT kepler_name, radius FROM Planet
+WHERE radius BETWEEN 1 AND 3 AND kepler_name IS NOT NULL;
+
+#OR
+
+SELECT kepler_name, radius 
+FROM Planet
+WHERE
+  radius BETWEEN 1 AND 3 AND
+  kepler_name IS NOT NULL;
