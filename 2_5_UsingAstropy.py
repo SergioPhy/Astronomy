@@ -29,7 +29,7 @@ def crossmatch(cat1, cat2, max_radius):
   sky_cat2 = SkyCoord(cat2*u.degree, frame='icrs')
   #print(sky_cat1)
   
-  #closest_ids is already an array, whereas closest_dists is not
+  #closest_ids is already an array, whereas closest_dists is an object
   closest_ids, closest_dists, _ = sky_cat1.match_to_catalog_sky(sky_cat2)
   #print(closest_ids)
   #print(closest_dists.value)
