@@ -27,3 +27,11 @@ ORDER BY Star.radius DESC;
 
 #-----------------------------------------------
 
+#To practise your outer joins, write a query which returns the kepler_id, t_eff and radius for all stars in the Star table which haven't got a planet as join 
+#partner. Order the resulting table based on the t_eff attribute in descending order.
+
+SELECT Star.kepler_id, Star.t_eff, Star.radius
+FROM Star
+LEFT OUTER JOIN Planet USING (kepler_id)
+WHERE Planet.koi_name IS NULL #Tal parece que koi_name nos dice cuando el planeta está junto a una estrella o no
+ORDER BY Star.t_eff DESC;
